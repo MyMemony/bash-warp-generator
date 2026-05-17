@@ -58,3 +58,13 @@ echo -e "\nОтсканируйте QR код конфигурации с пом
 echo "$conf" | qrencode -t utf8
 echo -e "\n"
 conf_base64=$(echo -n "${conf}" | base64 -w 0)
+
+# Save config to warp_XX.conf with sequential numbering
+counter=1
+while [ -f "warp_$(printf '%02d' $counter).conf" ]; do
+    counter=$((counter + 1))
+done
+filename="warp_$(printf '%02d' $counter).conf"
+
+echo "${conf}" > "${filename}"
+echo "✓ Конфигурация сохранена: ${filename}"
