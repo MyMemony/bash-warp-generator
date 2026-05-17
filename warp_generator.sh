@@ -55,7 +55,7 @@ echo "${conf}"
 [ -t 1 ] && echo "########### КОНЕЦ КОНФИГА ###########"
 
 echo -e "\nОтсканируйте QR код конфигурации с помощью приложения AmneziaWG на смартфон:\n"
-echo "$conf" | qrencode -t utf8
+echo -n "$conf_base64" | qrencode -s 3 -t utf8
 echo -e "\n"
 conf_base64=$(echo -n "${conf}" | base64 -w 0)
 
